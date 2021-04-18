@@ -20,9 +20,9 @@ namespace aecapital {
     public:
         OrderBook();
 
-        [[nodiscard]] auto GetBestBidPrice() const -> int32_t;
+        [[nodiscard]] auto GetBestBidPrice() const -> Price;
 
-        [[nodiscard]] auto GetBestAskPrice() const -> int32_t;
+        [[nodiscard]] auto GetBestAskPrice() const -> Price;
 
         template <typename Func>
         auto PrintOrderbook(int32_t token, Func print_func) -> void {

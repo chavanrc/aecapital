@@ -12,10 +12,7 @@ namespace aecapital {
         PacketSize   packet_size_{0};
         MessageCount message_count_{0};
 
-        friend std::ostream &operator<<(std::ostream &os, const MessageHeader &header) {
-            os << "packet_size: " << header.packet_size_ << " message_count: " << (unsigned)header.message_count_;
-            return os;
-        }
+        friend std::ostream &operator<<(std::ostream &os, const MessageHeader &header);
     };
 
     struct Message {
@@ -26,15 +23,9 @@ namespace aecapital {
 
         Message() = default;
 
-        Message(Quantity quantity, Price price, Side side, Type type)
-            : quantity_{quantity}, price_{price}, side_{side}, type_{type} {
-        }
+        Message(Quantity quantity, Price price, Side side, Type type);
 
-        friend std::ostream &operator<<(std::ostream &os, const Message &message) {
-            os << "quantity: " << message.quantity_ << " price: " << message.price_
-               << " side: " << (unsigned)message.side_ << " type: " << (unsigned)message.type_;
-            return os;
-        }
+        friend std::ostream &operator<<(std::ostream &os, const Message &message);
     };
 
 #pragma pack(pop)

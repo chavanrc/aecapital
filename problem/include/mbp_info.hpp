@@ -10,9 +10,6 @@ namespace aecapital {
 
         MbpInfo(Quantity qty, Price price);
 
-        friend std::ostream& operator<<(std::ostream& os, const MbpInfo& info) {
-            os << "qty: " << info.qty_ << " \tprice: " << info.price_;
-            return os;
-        }
+        friend std::ostream& operator<<(std::ostream& os, const MbpInfo& info);
     };
 }    // namespace aecapital

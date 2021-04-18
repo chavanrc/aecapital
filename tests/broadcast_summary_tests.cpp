@@ -25,12 +25,12 @@ TEST_CASE("aecapital file test", "[unit]") {
     std::ifstream infile(filename.c_str(), std::ios::in | std::ios::binary);
     if (infile.good()) {
         std::ofstream                              out_file{"file.out"};
-        int32_t                                    token = 0;
-        aecapital::OrderBook<aecapital::MAX_LEVEL> order_book;
+        int32_t                                    token{0};
+        aecapital::OrderBook<aecapital::MAX_LEVEL> order_book{};
         while (infile.good() && !infile.eof()) {
             aecapital::MessageHeader message_header{};
             infile.read((char*)&message_header, sizeof(aecapital::MessageHeader));
-            bool result = false;
+            bool result{false};
             while (message_header.message_count_--) {
                 aecapital::Message message{};
                 infile.read((char*)&message, sizeof(aecapital::Message));
@@ -55,6 +55,10 @@ TEST_CASE("aecapital file test", "[unit]") {
         if (out_file.good()) {
             out_file.close();
         }
+        infile.close();
+    } else {
+        std::stringstream error;
+        error << "Invalid input file: " << filename;
+        LOG_ERROR(error.str());
     }
-    infile.close();
 }

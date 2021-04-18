@@ -9,19 +9,19 @@ TEST_CASE("create order book test", "[unit]") {
 }
 
 TEST_CASE("new order test", "[unit]") {
-    auto               order_book = std::make_unique<aecapital::OrderBook<aecapital::MAX_LEVEL>>();
+    auto               order_book{std::make_unique<aecapital::OrderBook<aecapital::MAX_LEVEL>>()};
     aecapital::Message message{1'000, 940, 0, 0};
     REQUIRE(order_book->ProcessNewOrder(message.quantity_, message.price_, message.side_));
 }
 
 TEST_CASE("new order sell test", "[unit]") {
-    auto               order_book = std::make_unique<aecapital::OrderBook<aecapital::MAX_LEVEL>>();
+    auto               order_book{std::make_unique<aecapital::OrderBook<aecapital::MAX_LEVEL>>()};
     aecapital::Message message{1'000, 940, 1, 0};
     REQUIRE(order_book->ProcessNewOrder(message.quantity_, message.price_, message.side_));
 }
 
 TEST_CASE("new order buy sell test", "[unit]") {
-    auto               order_book = std::make_unique<aecapital::OrderBook<aecapital::MAX_LEVEL>>();
+    auto               order_book{std::make_unique<aecapital::OrderBook<aecapital::MAX_LEVEL>>()};
     aecapital::Message message_buy{1'000, 940, 0, 0};
     REQUIRE(order_book->ProcessNewOrder(message_buy.quantity_, message_buy.price_, message_buy.side_));
     aecapital::Message message_sell{1'000, 960, 1, 0};
@@ -29,34 +29,34 @@ TEST_CASE("new order buy sell test", "[unit]") {
 }
 
 TEST_CASE("change order test", "[unit]") {
-    auto               order_book = std::make_unique<aecapital::OrderBook<aecapital::MAX_LEVEL>>();
+    auto               order_book{std::make_unique<aecapital::OrderBook<aecapital::MAX_LEVEL>>()};
     aecapital::Message message{1'000, 940, 0, 1};
     REQUIRE(order_book->ProcessNewOrder(message.quantity_, message.price_, message.side_));
     REQUIRE(order_book->ProcessModifyOrder(message.quantity_, message.price_, message.side_));
 }
 
 TEST_CASE("change order sell test", "[unit]") {
-    auto               order_book = std::make_unique<aecapital::OrderBook<aecapital::MAX_LEVEL>>();
+    auto               order_book{std::make_unique<aecapital::OrderBook<aecapital::MAX_LEVEL>>()};
     aecapital::Message message{1'000, 940, 1, 1};
     REQUIRE(order_book->ProcessNewOrder(message.quantity_, message.price_, message.side_));
     REQUIRE(order_book->ProcessModifyOrder(message.quantity_, message.price_, message.side_));
 }
 
 TEST_CASE("delete order test", "[unit]") {
-    auto               order_book = std::make_unique<aecapital::OrderBook<aecapital::MAX_LEVEL>>();
+    auto               order_book{std::make_unique<aecapital::OrderBook<aecapital::MAX_LEVEL>>()};
     aecapital::Message message{1'000, 940, 0, 2};
     REQUIRE(order_book->ProcessNewOrder(message.quantity_, message.price_, message.side_));
     REQUIRE(order_book->ProcessDeleteOrder(message.quantity_, message.price_, message.side_));
 }
 
 TEST_CASE("delete order negative test", "[unit]") {
-    auto               order_book = std::make_unique<aecapital::OrderBook<aecapital::MAX_LEVEL>>();
+    auto               order_book{std::make_unique<aecapital::OrderBook<aecapital::MAX_LEVEL>>()};
     aecapital::Message message{1'000, 940, 0, 2};
     REQUIRE_FALSE(order_book->ProcessDeleteOrder(message.quantity_, message.price_, message.side_));
 }
 
 TEST_CASE("order book benchmark test", "[unit]") {
-    auto               order_book = std::make_unique<aecapital::OrderBook<aecapital::MAX_LEVEL>>();
+    auto               order_book{std::make_unique<aecapital::OrderBook<aecapital::MAX_LEVEL>>()};
     aecapital::Message message{1'000, 940, 0, 0};
     BENCHMARK("new order") {
         order_book->ProcessNewOrder(message.quantity_, message.price_, message.side_);

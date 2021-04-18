@@ -5,7 +5,7 @@ namespace aecapital {
     }
 
     template <size_t capacity>
-    auto OrderBook<capacity>::GetBestBidPrice() const -> int32_t {
+    auto OrderBook<capacity>::GetBestBidPrice() const -> Price {
         if (bid_books_.Size() > 0) {
             return bid_books_[0].price_;
         }
@@ -13,7 +13,7 @@ namespace aecapital {
     }
 
     template <size_t capacity>
-    auto OrderBook<capacity>::GetBestAskPrice() const -> int32_t {
+    auto OrderBook<capacity>::GetBestAskPrice() const -> Price {
         if (ask_books_.Size() > 0) {
             return ask_books_[0].price_;
         }
